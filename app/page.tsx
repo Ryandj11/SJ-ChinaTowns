@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { Timeline } from "@/components/timeline";
 import { ChinatownInfo } from "@/components/chinatown-info";
