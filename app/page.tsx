@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { MapComponent } from "@/components/map-component";
 import { Timeline } from "@/components/timeline";
 import { ChinatownInfo } from "@/components/chinatown-info";
 import { Header } from "@/components/header";
@@ -7,6 +6,13 @@ import { Footer } from "@/components/footer";
 import { ScrollToTop } from "@/components/scroll-to-top";
 import { ChinesePatternDivider } from "@/components/chinese-pattern-divider";
 import { Lantern } from "@/components/lantern";
+import dynamic from "next/dynamic";
+
+// Dynamically import MapComponent with SSR turned off
+const MapComponentWithNoSSR = dynamic(
+  () => import("@/components/map-component").then((mod) => mod.MapComponent),
+  { ssr: false }
+);
 
 export default function Home() {
   return (
@@ -148,13 +154,17 @@ export default function Home() {
                 Why This Matters
               </h3>
               <p className="leading-relaxed mb-4">
-              It matters that we remember these Chinatowns because they were once vibrant communities full of life, 
-              culture, and resilience, and their erasure wasn’t an accident, it was the result of racism, exclusion, 
-              and violence. By forgetting these histories, we erase the people who built them and the struggles 
-              they went through just to survive. Learning about what happened in San Jose helps us see patterns 
-              that still exist today, and reminds us why it’s so important to protect and honor the stories of
-               marginalized communities. Remembering these Chinatowns isn’t just about the past but it’s about 
-               about making sure this kind of history isn’t repeated or ignored.
+                It matters that we remember these Chinatowns because they were
+                once vibrant communities full of life, culture, and resilience,
+                and their erasure wasn't an accident, it was the result of
+                racism, exclusion, and violence. By forgetting these histories,
+                we erase the people who built them and the struggles they went
+                through just to survive. Learning about what happened in San
+                Jose helps us see patterns that still exist today, and reminds
+                us why it's so important to protect and honor the stories of
+                marginalized communities. Remembering these Chinatowns isn't
+                just about the past but it's about about making sure this kind
+                of history isn't repeated or ignored.
               </p>
             </div>
 
@@ -201,7 +211,7 @@ export default function Home() {
             and its destruction.
           </p>
           <div className="h-[500px] md:h-[600px] rounded-lg overflow-hidden shadow-xl border-4 border-chinese-red/20">
-            <MapComponent />
+            <MapComponentWithNoSSR />
           </div>
           <div className="mt-8 p-4 bg-chinese-red/10 border-l-4 border-chinese-red rounded-r-md">
             <p className="text-sm text-gray-700">
